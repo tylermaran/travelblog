@@ -55,6 +55,14 @@ nav {
     margin: 40px 15px 20px 15px;
 }
 
+.expand-tile {
+    float: left;
+    width: 20vw;
+    height: 20vw;
+    margin: 40px 15px 20px 15px;
+}
+
+
 .front {
     /* background-image: url("https://dummyimage.com/400x400/000/fff"); */
     border: 1px solid white;

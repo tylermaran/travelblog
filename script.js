@@ -14,66 +14,94 @@ var content = {
     "Day1": "Stuff goes here."
 }
 
-
 // Initializes page with country squares
-for (let i = 0; i < cards.name.length; i++) {
+function loadPage() {
 
-    console.log(cards.name[i]);
-    var tile = $("<div>");
-    tile.addClass("card-grid");
+    for (let i = 0; i < cards.name.length; i++) {
 
-    var front = $("<div>");
-    front.addClass("front", cards.name[i]);
-    front.text("Front Content");
-    front.css("background-image", 'url(' + cards.image[i] + ')');
+        console.log(cards.name[i]);
+        var tile = $("<div>");
+        tile.addClass("card-grid");
+        tile.attr("id", "tile_" + cards.name[i]);
 
-    var border = $("<div>");
-    border.addClass("border");
-    front.append(border);
+        var front = $("<div>");
+        front.addClass("front");
+        front.attr("id", "front_" + cards.name[i])
+        front.text("Front Content");
+        front.css("background-image", 'url(' + cards.image[i] + ')');
 
-    var back = $("<div>");
-    back.addClass("back");
-    back.attr("id", cards.name[i]);
-    back.text(cards.name[i]);
+        var border = $("<div>");
+        border.addClass("border");
+        front.append(border);
 
-    tile.append(front);
+        var back = $("<div>");
+        back.addClass("back");
+        back.attr("id", "back_" + cards.name[i]);
+        back.text(cards.name[i]);
 
-    tile.append(back);
+        tile.append(front);
 
-    $(".tiles").append(tile);
-    var tempName = cards.name[i];
+        tile.append(back);
+
+        $(tile).hide().appendTo(".tiles").fadeIn(500);
+
+    }
+
+    // Watches for second click on back tile
+    $(".back").click(function () {
+        expand($(this).text());
+    });
+
 
 }
-
-// Watches for second click on back tile
-$(".back").click(function () {
-    expand($(this).text());
-});
-
 
 // Expands card to full page on click
 function expand(name) {
     console.log("Ran expand function for " + name);
 
-    for (let i =1; i < cards.name.length; i++) {
-        
+    for (let i = 0; i < cards.name.length; i++) {
+
         if (cards.name[i] != name) {
             var tempName = cards.name[i];
-            $("#" + tempName).hide();
-            $(".front").hide(); 
+            $("#front_" + tempName).hide();
+            $("#back_" + tempName).hide();
+            $("#tile_" + tempName).hide();
+            // $(".front").hide();
+            $("." + tempName).hide();
             console.log("Hiding " + tempName);
         }
-        
+
     }
 
-    $("#" + name).animate({
-        left: '20%',
-        opacity: '0.75',
-        height: '150px',
-        width: '60vw'
+    // $(".tiles").remove();
+    $(".card-grid").flip(false);
+
+
+    // $("#tile_" + name).on('flip:done', function () {
+    //     $("#tile_" + name).removeClass("card-grid");
+    //     $("#tile_" + name).addClass("expand-tile");
+
+
+    // });
+
+
+    // $("#front_" + name).animate({
+    //     left: '20%',
+    //     opacity: '0.75',
+    //     height: '150px',
+    //     width: '60vw'
+    // });
+
+
+    var backButton = $("<div>");
+
+    $(".card-grid").flip({
+        axis: 'y',
+        trigger: 'hover'
     });
 
 }
+loadPage();
 
 // Runs card flip
 $(".card-grid").flip({
