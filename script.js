@@ -21,6 +21,7 @@ function loadPage() {
 
         console.log(cards.name[i]);
         var tile = $("<div>");
+        0
         tile.addClass("card-grid");
         tile.attr("id", "tile_" + cards.name[i]);
 
@@ -77,20 +78,40 @@ function expand(name) {
     $(".card-grid").flip(false);
 
 
-    // $("#tile_" + name).on('flip:done', function () {
-    //     $("#tile_" + name).removeClass("card-grid");
-    //     $("#tile_" + name).addClass("expand-tile");
+
+    // When flip is done, indiana jones the element and then animate the new guy
+    $("#tile_" + name).on('flip:done', function () {
+        $("#tile_" + name).hide();
+        console.log("Flip is done");
+
+        var expandDiv = $("<div>");
+        expandDiv.addClass("expand-tile");
+
+        var front = $("<div>");
+        front.addClass("front");
+        for (let i = 0; i < cards.name.length; i++) {
+            if (cards.name[i] === name) {
+                expandDiv.css("background-image", 'url(' + cards.image[i] + ')');
+            }
+        }
+
+        expandDiv.append(front);
+        expandDiv.appendTo(".tiles");
+
+        var newBorder = $("<div>");
+        newBorder.addClass("newBorder");
+        newBorder.appendTo(".expand-tile");
+
+        $(".expand-tile").animate({
+            opacity: '0.90',
+            width: '80vw',
+            
+        });
+
+    });
 
 
-    // });
 
-
-    // $("#front_" + name).animate({
-    //     left: '20%',
-    //     opacity: '0.75',
-    //     height: '150px',
-    //     width: '60vw'
-    // });
 
 
     var backButton = $("<div>");

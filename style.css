@@ -60,6 +60,9 @@ nav {
     width: 20vw;
     height: 20vw;
     margin: 40px 15px 20px 15px;
+    border: 1px solid white;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
 
 
@@ -67,11 +70,20 @@ nav {
     /* background-image: url("https://dummyimage.com/400x400/000/fff"); */
     border: 1px solid white;
     background-repeat: no-repeat;
-    background-size: 20vw 20vw;
+    background-size: 100% 100%;
 }
 
 .border {
     position: absolute;
+    border: 2px solid white;
+    left: 2%;
+    top: 2%;
+    height: 96%;
+    width: 96%;
+}
+
+.newBorder {
+    position: relative;
     border: 2px solid white;
     left: 2%;
     top: 2%;
